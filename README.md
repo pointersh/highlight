@@ -27,27 +27,16 @@ const view = <Code code={src} language="python" startLine={1} />
 Token kinds: `text`, `comment`, `string`, `number`, `keyword`, `fn`, `add`,
 `del`, `meta`, `tag`.
 
-## Build and check
+## Install
 
 ```sh
+git clone https://github.com/pointersh/highlight.git && cd highlight
 rustup target add wasm32-unknown-unknown
-npm run build    # cargo build --release --target wasm32-unknown-unknown, copied to highlight.wasm
-npm run check    # parity against the saved output of the original TypeScript tokenizer
-cargo test
+npm run build
 ```
 
-The package ships TypeScript source and imports `highlight.wasm` as bytes, so
-the bundler needs a binary loader for `.wasm` (esbuild:
-`loader: { ".wasm": "binary" }`). Inside a webview, the Content Security
-Policy needs `'wasm-unsafe-eval'` in `script-src`.
-
-## WebAssembly interface
-
-| Export | Signature | Purpose |
-|---|---|---|
-| `alloc` | `(units) → ptr` | Space for the code followed by the language name, as UTF-16 |
-| `highlight` | `(ptr, codeUnits, langUnits) → ptr` | Tokenizes; the result is `[count, (start, length, kind) × count]` as `u32` |
-| `dealloc` | `(ptr, units)` | Frees the input |
-| `kind_names` | `() → ptr` | A `u32` byte length, then the kind names in kind order, space-separated |
+Your bundler needs a binary loader for `.wasm` (esbuild:
+`loader: { ".wasm": "binary" }`). Building, checks and the WebAssembly
+interface: [docs/internals.md](docs/internals.md).
 
 Part of [Pointer](https://github.com/pointersh/Pointer). MIT.
