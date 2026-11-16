@@ -1,0 +1,9 @@
+[package]
+name = "pointer-highlight"
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+description = "Pointer's syntax highlighter tokenizer, compiled to WebAssembly for the webview."
+
+[lib]
+crate-type = ["cdylib", "rlib"]

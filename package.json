@@ -1,0 +1,36 @@
+{
+  "name": "@pointersh/highlight",
+  "version": "0.1.0",
+  "description": "Tiny zero-dependency syntax highlighter. Framework-agnostic core, optional React component, themed entirely through CSS variables.",
+  "license": "MIT",
+  "author": "Ayush Yadav <ayush421301@gmail.com> (https://thatayush.com)",
+  "type": "module",
+  "sideEffects": [
+    "*.css"
+  ],
+  "exports": {
+    ".": "./js/index.ts",
+    "./react": "./js/react.tsx",
+    "./theme.css": "./theme.css"
+  },
+  "peerDependencies": {
+    "react": ">=17"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "types": "./js/index.ts",
+  "files": [
+    "js",
+    "src",
+    "Cargo.toml",
+    "theme.css",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "cargo build --release --target wasm32-unknown-unknown && cp target/wasm32-unknown-unknown/release/pointer_highlight.wasm highlight.wasm",
+    "check": "node parity.mjs"
+  }
+}
